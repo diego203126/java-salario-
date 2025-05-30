@@ -1,0 +1,70 @@
+import java.util.Scanner;
+import java.text.NumberFormat;
+import java.util.Locale;
+
+public class ReajusteSalarial {
+    public static void main(String[] args) {
+        Scanner entrada = new Scanner(System.in);
+        final double TAXA_INFLACAO = 3.8;
+
+        // Formatação monetária brasileira
+        NumberFormat formatoMoeda = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+
+        while (true) {
+            // Solicita o nome do colaborador
+            System.out.print("Digite o nome do colaborador: ");
+            entrada.nextLine(); // limpa o buffer
+            String nomeColaborador = entrada.nextLine();
+
+            // Solicita o salário
+            System.out.print("Digite o salário atual do colaborador: R$ ");
+            double salarioBase = entrada.nextDouble();
+
+            // Validação de salário
+            if (salarioBase <= 0) {
+                System.out.println("Erro: O salário deve ser maior que zero.\n");
+                continue;
+            }
+
+            double percentualReajuste;
+
+            // Determina a faixa de reajuste
+            if (salarioBase <= 280) {
+                percentualReajuste = 20;
+            } else if (salarioBase <= 700) {
+                percentualReajuste = 15;
+            } else if (salarioBase <= 1500) {
+                percentualReajuste = 10;
+            } else {
+                percentualReajuste = 5;
+            }
+
+            // Cálculos
+            double valorReajuste = salarioBase * (percentualReajuste / 100);
+            double novoSalario = salarioBase + valorReajuste;
+            double ganhoReal = ((1 + percentualReajuste / 100) / (1 + TAXA_INFLACAO / 100) - 1) * salarioBase;
+
+            // Saída dos resultados com nome
+            System.out.println("\n--- RESULTADO DO REAJUSTE ---");
+            System.out.println("Colaborador: " + nomeColaborador);
+            System.out.println("1. Salário anterior: " + formatoMoeda.format(salarioBase));
+            System.out.printf("2. Percentual de reajuste: %.1f%%%n", percentualReajuste);
+            System.out.println("3. Valor do reajuste: " + formatoMoeda.format(valorReajuste));
+            System.out.println("4. Novo salário: " + formatoMoeda.format(novoSalario));
+            System.out.println("5. Ganho real (descontando a inflação): " + formatoMoeda.format(ganhoReal));
+
+            // Pergunta se deseja continuar
+            System.out.print("\nDeseja calcular outro salário? (s/n): ");
+            char resposta = entrada.next().toLowerCase().charAt(0);
+
+            if (resposta != 's') {
+                System.out.println("Programa encerrado.");
+                break;
+            }
+
+            System.out.println(); // Espaço entre repetições
+        }
+
+        entrada.close();
+    }
+}
