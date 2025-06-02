@@ -4,14 +4,14 @@ public class ReajusteSalarial {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        // Entrada do salário atual
+       
         System.out.print("Digite o salário atual do colaborador: R$ ");
         double salarioAtual = scanner.nextDouble();
 
         double percentualAumento = 0;
         double inflacao = 3.8; // em porcentagem
 
-        // Verifica a faixa salarial e aplica o percentual de aumento
+     
         if (salarioAtual <= 280.00) {
             percentualAumento = 20;
         } else if (salarioAtual <= 700.00) {
@@ -22,14 +22,14 @@ public class ReajusteSalarial {
             percentualAumento = 5;
         }
 
-        // Calcula os valores necessários
+       
         double valorAumento = salarioAtual * (percentualAumento / 100);
         double novoSalario = salarioAtual + valorAumento;
 
         // Ajuste real descontando a inflação
         double aumentoReal = (novoSalario / (1 + inflacao / 100)) - salarioAtual;
 
-        // Saída das informações
+     
         System.out.println("\n--- Resultado do Reajuste ---");
         System.out.printf("1. Salário antes do reajuste: R$ %.2f%n", salarioAtual);
         System.out.printf("2. Percentual de aumento aplicado: %.1f%%%n", percentualAumento);
