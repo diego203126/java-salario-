@@ -12,7 +12,7 @@ public class ReajusteSalarial {
             double salario = scanner.nextDouble();
             double percentual = 0;
 
-            // Determina o percentual de aumento conforme faixa salarial
+          
             if (salario <= 280) {
                 percentual = 20;
             } else if (salario <= 700) {
@@ -23,12 +23,12 @@ public class ReajusteSalarial {
                 percentual = 5;
             }
 
-            // Cálculos
+           
             double aumento = salario * (percentual / 100);
             double novoSalario = salario + aumento;
             double aumentoReal = ((1 + percentual / 100) / (1 + INFLACAO / 100) - 1) * salario;
 
-            // Exibe as informações
+           
             System.out.println("\n--- RESULTADO ---");
             System.out.printf("1. Salário antes do reajuste: R$ %.2f\n", salario);
             System.out.printf("2. Percentual de aumento aplicado: %.1f%%\n", percentual);
@@ -36,7 +36,7 @@ public class ReajusteSalarial {
             System.out.printf("4. Novo salário após o aumento: R$ %.2f\n", novoSalario);
             System.out.printf("5. Valor do aumento real (descontada a inflação): R$ %.2f\n", aumentoReal);
 
-            // Verifica se deseja continuar
+         
             System.out.print("\nDeseja calcular outro salário? (s/n): ");
             continuar = scanner.next().toLowerCase().charAt(0);
 
